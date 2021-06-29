@@ -9,11 +9,13 @@ OCFPATH="${OCFBASEPATH}${OCFSUBPATH}"
 PLATFORM=`jq --raw-output '.platforms[0]' ${CURPWD}/${PROJNAME}-config.json`
 
 if [ "$PLATFORM" == "esp32" ]; then
-  MY_COMMAND="cd ${OCFPATH}/iotivity-lite/port/${PLATFORM}/"
+  #MY_COMMAND="cd ${OCFPATH}/iotivity-lite/port/${PLATFORM}/"
+  #eval ${MY_COMMAND}
+  MY_COMMAND="cd ${CURPWD}/src"
   eval ${MY_COMMAND}
-  MY_COMMAND="idf.py erase_flash"
+  MY_COMMAND="idf.py -p /dev/ttyUSB0 erase_flash"
   eval ${MY_COMMAND}
-  cd $CURPWD
+  #cd $CURPWD
 elif [ "$PLATFORM" == "arduino" ]; then
   echo "Arduino reset"
 elif [ "$OCFSUBPATH" == "/iot" ]; then
